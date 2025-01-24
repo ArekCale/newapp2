@@ -1,0 +1,40 @@
+body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#form{
+    display: flex;
+    flex-direction: column;
+    border:1px solid black;
+    justify-content: center;
+    align-items: center;
+    gap:10px;
+    padding:10px;
+
+}
+
+#body_{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    
+}
+
+#form2{
+    display: flex;
+    border:1px solid black;
+    flex-direction: column;
+    gap:10px;
+    justify-content: center;
+    align-items:center;
+    padding:10px;
+}
+label{
+    border:0px solid black;
+    width:80%;
+    display: flex;
+    justify-content:space-between;
+}
