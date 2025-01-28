@@ -22,8 +22,8 @@ update.post("/update",async(req,res)=>{
     
     let usr = await User.findOne({where:{email:email}})
     
-
-    if(usr != null){
+    //console.log(usr.email);
+    if(usr !== null){
 
          const Mail_ = nodemail.createTransport({
                     service:'gmail',
@@ -52,10 +52,10 @@ update.post("/update",async(req,res)=>{
             
                             if(err){
                                 console.log(err.message);
-                                res.json("Nie Przeszło !!!");
+                                res.json({1:"Nie Przeszło !!!",2:false});
                             }
                             else{ console.log("przeszło...") 
-                                res.json("Przeszło ...");
+                                res.json({1:"przeszło...",2:true});
                             } 
                         });
          usr.token = arr.join("");
@@ -63,7 +63,7 @@ update.post("/update",async(req,res)=>{
 
     }
     else{
-        res.json("User Can`t Be Find")
+        res.json({1:"User Can`t Be Find",2:false})
     }
     
   
@@ -103,7 +103,14 @@ update.post('/write',async(req,res)=>{
         U.password = hash;
         U.token = token;
         U.save();
+        console.log("ok");
         res.json(true)
+        res.render(__dirname+"../../public/update_password.pug",{
+            code:"Password changed. Go back to login page"
+        },(err,a)=>{
+            if(err){console.log(err)}
+            else{ console.log("Gotowe") }
+        });
     }
     else
     {
@@ -117,7 +124,9 @@ update.post("/counter",async(req,res)=>{
    
     let usr = await Data.findOne({ips:"::1"});
     
-   let t = req.body.time - usr.time;
+   
+   
+    let t = req.body.time - usr.time;
     console.log((t/60000).toFixed());
     
 

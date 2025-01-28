@@ -17,22 +17,27 @@ const input = (event) =>{
 }
 
 
-const check = async(e,path)=>{ 
+const check = async(e)=>{ 
 
-    let info = await fetch(path,{ 
-        method:"POST",
-        headers:{'Content-Type':'application/json'},
-        body:JSON.stringify({password:e.target.value})
-    })
-    .then(x=>{ return x.json() })
-    .catch(err=>{ return err.json() })    
+    let {value} = e.target;
     
-    if(info===true
-        && document.getElementById("password_").value
-        === document.getElementById("repeat_").value
-    ){ document.getElementById("snd_").disabled = false; }
-    else{ document.getElementById("snd_").disabled = true; }
-      
+    let regex = /^((?=\S*?[A-Z])(?=\S*?[a-z])(?=\S*?[0-9]).{6,})\S$/;
+    let a = regex.test(value);
+    let b = document.getElementById("password_").value
+            ===
+            document.getElementById("repeat_").value
+            ?
+            true
+            :
+            false;
+
+    
+
+    if(a && b)
+        { document.getElementById("snd_").disabled = false; }
+    else{ document.getElementById("snd_").disabled = true;  }
+    
+   
  }
 
 const send_data = async(e)=>{
@@ -64,4 +69,5 @@ const snd = async()=>{
     }).then(x=>{ return x.json() })
     .catch(err=>{ console.log(err) })
 
+    document.getElementById("data2_").innerHTML = "Updated"
 }

@@ -1,19 +1,22 @@
 const express = require("express");
-const User  = require("../db");
-const bcrypt = require('bcrypt');
+const {User}  = require("../db");
+
 const path = require("path")
 const nodemail = require("nodemailer");
 const jwt= require("jsonwebtoken");
 const register = express.Router();
 
 
+
+
 register.post("/register",async(req,res)=>{
     
     let {email, password} = req.body;
-
+    
     let response = await User.findOne({where:{email:email}});
     
-    if(response===null){
+    
+    if(response==null){
         
         let arr =[];
 
@@ -24,7 +27,7 @@ register.post("/register",async(req,res)=>{
         
         let usr = await User.create(
             { 
-                email:email,password:bcrypt.hashSync(password,10),
+                email:email,password:password,
                 token:arr.join("")
             });
          
@@ -57,10 +60,10 @@ register.post("/register",async(req,res)=>{
             
             if(err){
                 console.log(err.message);
-                res.json("Nie Przeszło !!!");
+                res.json("Cant Sand Token to given Email, Please Try Again !!!");
             }
-            else{ console.log("przeszło...") 
-                res.json("Przeszło ...");
+            else{ 
+                res.json("Link with activation token has been send to Your email adress.  ");
             } 
             
         })
@@ -69,6 +72,7 @@ register.post("/register",async(req,res)=>{
     else{
         res.json("Email Already Exists in Database")
     }
+
     
 });
 
