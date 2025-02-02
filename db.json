@@ -1,0 +1,32 @@
+{
+    "Users":[
+        {
+            "Id":0,
+            "email":"Franko@gmail.com",
+            "password":"",
+            "token":""
+        },
+        {   
+            "Id":1,
+            "email":"Marek@gmail.com",
+            "password":"",
+            "token":""
+
+        },
+        {   
+            "Id":2,
+            "email":"Marek@gmail.com",
+            "password":"",
+            "token":""
+
+        },
+        {   
+            "Id":3,
+            "email":"ArekB@grr.la",
+            "password":"",
+            "token":""
+
+        }
+
+    ]
+}
