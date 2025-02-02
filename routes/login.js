@@ -10,12 +10,23 @@ const jwt = require('jsonwebtoken');
 login.post("/login",async(req,res)=>{
 
 let { email, password } =req.body;
+let usr ="";
 
-    const usr = await User.findOne({where:{email:email}})
+ if(User.length!==0){  
+    
+        const usr = await User.findOne({where:{email:email}})
         .then(x=>{ return x; })
         .catch(err=>{ console.log(err)});
+    }       
+else{  
+        const { readFileSync } = require("fs");
+        let f = JSON.parse(readFileSync("./db.json"));
+        let User = f.Users;
+        usr =User.find(x=>{ return x.email === email });
+        console.log(usr);
+ }      
 
-    if(usr!==null)
+    if(usr!==null && usr !== undefined)
     {
 
         let response = bcrypt.compareSync(password,usr.password);
@@ -43,8 +54,10 @@ let { email, password } =req.body;
     else{ 
         res.json({1:"Cant Find User with Given Email",2:false}) 
     }   
-    
-    
+ 
+ 
+     
+
 });
 
 login.post("/logout",(req,res)=>{

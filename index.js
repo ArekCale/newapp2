@@ -17,9 +17,20 @@ app.use(register);
 app.use(login);
 app.use(update);
 app.set("view engine","pug")
+app.set('views','./views');
+
+app.get("/home",(req,res)=>{
+    
+    res.render(__dirname+'/public/main.pug',{a:"A"});
+    
+    console.log("ok");
+ })
 
 app.listen(port,(err)=>{
     if(err){console.log(err)}
     else{ console.log(`Server on Port ${port}`)}
 })
+
+module.exports = app;
+
     

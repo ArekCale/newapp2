@@ -4,16 +4,17 @@ const {User}  = require("../db");
 const path = require("path")
 const nodemail = require("nodemailer");
 const jwt= require("jsonwebtoken");
+const { Console } = require("console");
 const register = express.Router();
-
-
-
 
 register.post("/register",async(req,res)=>{
     
     let {email, password} = req.body;
-    
-    let response = await User.findOne({where:{email:email}});
+    let response ="x"
+   
+    response = await User.findOne({where:{email:email}});
+                       
+   
     
     
     if(response==null){
